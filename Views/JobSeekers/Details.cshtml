@@ -1,0 +1,66 @@
+﻿@model JOBPORTAL.Models.JobSeeker
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>JobSeeker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeekerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeekerUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeekerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeekerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeekerContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeekerContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeekerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeekerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeekerPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeekerPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employer.EmployerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employer.EmployerUsername)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobSeekerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

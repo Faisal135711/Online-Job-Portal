@@ -1,0 +1,72 @@
+﻿@model JOBPORTAL.Models.Resume
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Resume</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumeUploadDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumeUploadDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumeLastModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumeLastModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CvFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CvFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CvFileText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CvFileText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeeker.JobSeekerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeeker.JobSeekerUsername)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

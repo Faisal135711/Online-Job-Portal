@@ -1,0 +1,281 @@
+<?php
+
+session_start();
+
+$usernameGlob = "";
+$_SESSION['cidGlob']="";
+
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$errors=array();
+$db = 'projectf';
+$link = mysqli_connect($host, $user, $password, $db);
+
+if(isset($_COOKIE["signInUserName"])){
+    $usernameGlob = $_COOKIE["signInUserName"];
+	$_SESSION["username"]=$usernameGlob;
+}
+else if (isset($_SESSION['signUpUserName'])) {
+    $usernameGlob = $_SESSION['signUpUserName'];
+	$_SESSION["username"]=$usernameGlob;
+
+}
+else if (isset($_SESSION['signInUserName'])) {
+    $usernameGlob = $_SESSION['signInUserName'];
+	$_SESSION["username"]=$usernameGlob;
+    $sql = "Select * from user_info Where username = '$usernameGlob' Or email = '$usernameGlob'";
+    $result = mysqli_query($link, $sql);
+    $noOfData = mysqli_num_rows($result);
+    $row = mysqli_fetch_row($result);
+    $usernameGlob = $row[1];
+
+}
+
+
+$filter = $_SESSION['filter'];
+//echo $filter."here";
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['signUpUserName']);
+    unset($_SESSION['signInUserName']);
+    header("location: homepagewithoutlogin.php");
+}
+
+
+?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<link href="css/test.css" rel="stylesheet"/>
+    <link href="css/customStyle.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">
+    <style>
+       .fa {
+           padding: 15px;
+           font-size: 15px;
+           width: 40px;
+           text-align: center;
+           text-decoration: none;
+           margin: 5px 2px;
+           border-radius: 50%;
+       }
+
+       .fa:hover {
+           opacity: 0.7;
+       }
+
+       .fa-facebook {
+         background: #3B5998;
+         color: white;
+       }
+
+       .fa-twitter {
+         background: #55ACEE;
+         color: white;
+       }
+       .fa-youtube {
+         background: #bb0000;
+         color: white;
+       }
+
+       .fa-instagram {
+         background: #125688;
+         color: white;
+       }
+       .hr1{
+           margin-left: 30px;
+           margin-right: 30px;
+       }
+       .cls{
+           margin-left: 30px;
+           color: white;
+           font-size: 15px;
+       }
+       .vl {
+           border-left: 6px solid green;
+           height: 500px;
+       }
+
+   </style>
+</head>
+<body style="background-color:#021526">
+
+  <div class="container-fluid">
+      <div class="row" style="height: auto">
+          <div class="col-md-8 col-lg-8 col-sm-8 col-xs-7 topRowF">Football</div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-5 topRowS">BUZZ</div>
+      </div>
+  </div>
+  <div class="navbar navbar-inverse navbar-static-top navbar-expand-md mb-5">
+      <div class="container naigation">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse navHeaderCollapse">
+              <ul class="nav navbar-nav navbar-left">
+                  <li class="nav-item"><a class="nav-link" href="homepage.php">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                  <li class="nav-item"><a href="about.php">About</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                  <?php if($usernameGlob != "") : ?>
+                      <li class="nav-item">
+                          <img src="<?php echo $row[9] ?>" class="img-circle" alt="User" width="40px" height="40px">
+                      </li>
+                      <li class="nav-item" style="margin-left: -10px">
+                           <a href="privatepage.php"style="color: white;"><?php echo $usernameGlob ?></a>
+                      </li>
+                      <li class="nav-item">
+                         <a class="nav-link" href="homepage.php?logout='1'" style="color: white;">Log Out</a>
+                      </li>
+                      <li class="nav-item">
+                          <form method='post' action='sort.php'>
+                                &nbsp;
+                                <input type='text'  placeholder='Search..' name='search' style='width: 100px; margin-top: 10px'>
+                                <button type='submit' name='searchButton'><span class='glyphicon glyphicon-search'></span></button>
+                          </form>
+                      </li>
+                  <?php else : ?>
+                      <li class="nav-item">
+                          <a class="nav-link" href="login.php?logout='1'" style="color: white;">Log In</a>
+                      </li>
+                  <?php endif; ?>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+<div class="container categor_block">
+	<div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-0"></div>
+		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+        <?php
+
+		include('db.php');
+			$topics ="";
+			$cidd="";
+			$kateid="";
+
+			$_SESSION["view_category_cateid"]="";
+			$_SESSION["categoryid"]=$cidd;
+
+			$test;
+			$test1;
+
+			if (!isset($_SESSION['signInUserName']) && !isset($_SESSION['signUpUserName'])) {
+               $logged=" |Please log in to create a topic in this category.";
+				echo $logged;
+            }
+			else{
+				$cidd=$_SESSION["ss"];
+				$_SESSION["categoryid"]=$cidd;
+				$_SESSION["view_category_cateid"]=$cidd;
+				$kateid=$_SESSION["view_category_cateid"];
+
+                // logged in
+	            $logged= "<a style='color:white;'  href='index1.php?cid=".$kateid."'>Click here to Create a Post<a> ";
+			//    $eqe="qrqrasfaf";
+			    echo $logged;
+			}
+
+
+			$_SESSION["view_category_cateid"]=$_SESSION["ss"];
+			$kateid=$_SESSION["view_category_cateid"];
+			$sql="select id from categories where id='".$kateid."' LIMIT 1";
+            $sql2 = "";
+			$res=mysqli_query($link,$sql) or die(mysqli_error());
+
+			if(mysqli_num_rows($res)==1){
+
+                $sql2="select *from topics where topic_creator='".$filter."'";
+
+				$res2=mysqli_query($link,$sql2) or die(mysqli_error());
+				if(mysqli_num_rows($res2)  >0){
+					$topics .= "<table width=100%  border=0 bordercolor=white style='border-collapse:collapse;'>";
+					while($row = mysqli_fetch_assoc($res2)){
+
+						$tid=$row['id'];
+						$title=$row['topic_title'];
+						$views=$row['topic_views'];
+						$date=$row['topic_date'];
+						$creator=$row['topic_creator'];
+						$cateid=$row['category_id'];
+						$content=$row['topic_content'];
+						$lastuser=$row['topic_last_user'];
+						$replydate=$row['topic_reply_date'];
+						$status=$row['topic_status'];
+						$image=$row['topic_image'];
+						$imagename=$row['image_name'];
+						$replies=$row['topic_replies'];
+						$test=$image;
+						$test1=$imagename;
+						$temp="";
+
+
+						$topics.= " <tr><td colspan='6' style='color:#021526;'>    a   </td></tr>";
+						$topics .= "<tr style='background-color:red;'><td><div style='color:white;'>  Topic Title</div></td><td align='left'>  <div style='color:white;'>   Comments   </div> </td> <td align='center' >  </td><td align='center' >  </td>   <td align='right' >  <div style='color:white;'>   Views    </div> </td></tr>";
+						$topics.= " <tr><td colspan='6' style='color:#021526;'>    a   </td></tr>";
+						$topics .= "<tr><td><font size='6'><a style='color:white;' href='view_topic.php? cid=".$kateid."&tid=".$tid."'>".$title."</a><tr><td><div style='margin-top:50px;   width:575spx;  height:350px;'>
+					    <img style='width: 100%;  height: 100%;' src='$image'></div></td><tr><tr><td><a href='homepage.php?cid=".$kateid."&tid=".$tid."'>".$temp."</a><br /><span class='post_info'><div style='color:white;'>Posted by: "."<form action='writer.php' method='post'><input style=' background-color:#021526; border: 0px; color:white; font-size:22px;  ' type='submit' name='writerName' value='$creator'></form>"." on  ".$date."</div></span></td><td align='center' style='color:white;' >".$replies."</td><th></th><td align='center'style='color:white;' >".$views."</td></tr>";
+
+
+						$topics.= " <tr><td colspan='3' style='color:#021526;'>    a   </td></tr>";
+
+                        $n_query = "select * from topics where id = '$tid'";
+                        $n_result = mysqli_query($link, $n_query);
+                        $n_noOfData = mysqli_num_rows($n_result);
+                        $n_row = mysqli_fetch_row($n_result);
+                        $fetch_content = $n_row[3];
+                        $heading = substr($fetch_content, 0, 30);
+
+						$topics.= " <tr><td colspan='3' style='color:#021526;'>    a   </td></tr>";
+
+					}
+					$topics .= "</table>";
+					echo $topics;
+				}
+
+				else{
+					 echo  "<a href='homepage.php?cid=" .$_SESSION["view_category_cateid"]. "'>Return to homepage <a> ";
+				     echo "<p style='color: white;'>This user didn't post anything yet or the user doesn't exist.</p>";
+				}
+			}
+
+			else{
+				echo  "<a href='homepage.php?cid=".$kateid."'> Return to homepage<a> ";
+				echo "<p>You are trying to view a category that doesnt exist</p>";
+			}
+
+		?>
+
+	</div>
+
+
+
+	   <div class="col-md-2 col-lg-8 col-sm-8 col-xs-0"></div>
+
+    </div>
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

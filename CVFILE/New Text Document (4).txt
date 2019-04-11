@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using JOBPORTAL.Models;
+
+
+namespace JOBPORTAL.Controllers
+{
+    public class EmployerController : Controller
+    {
+        // GET: Employer
+        public ActionResult Index()
+        {
+            using (JOB_PORTAL1Entities db = new JOB_PORTAL1Entities())
+            {
+                return View(db.Employers.ToList());
+            }
+        }
+
+
+
+        public ActionResult EmployerRegistration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EmployerRegistration(Employer account)
+        {
+            if (ModelState.IsValid)
+            {
+                using (JOB_PORTAL1Entities db = new JOB_PORTAL1Entities())
+                {
+                    db.Employers.Add(account);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+                ViewBag.EmployerRegistrationMessage = account.EmployerUsername + " successfully registered";
+            }
+            return View();
+        }
+        //login
+        public ActionResult EmployerLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EmployerLogin(Employer user)
+        {
+            using(JOB_PORTAL1Entities db = new JOB_PORTAL1Entities())
+            {
+                var usr = db.Employers.Single(u => u.EmployerUsername == user.EmployerUsername && u.EmployerPassword == user.EmployerPassword);
+                if (usr != null)
+                {
+                    Session["EmployerId"] = usr.EmployerId.ToString();
+                    Session["EmployerUsername"] = usr.EmployerUsername.ToString();
+                    return RedirectToAction("LoggedIn");
+                }
+                else
+                {
+                    ModelState.AddModelError("", " username or password is wrong");
+                }
+                return View();
+            }
+        }
+
+
+        public ActionResult LoggedIn()
+        {
+            if (Session["EmployerId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("EmployerLogin");
+            }
+        }
+
+
+    }
+}

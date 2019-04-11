@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="45466a8a574a45bfb93e2fcc41c11aa8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Employer" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmployerSelectsSeeker" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobAppoinment" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobCategory" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobSeeked" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobSeeker" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Resume" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__EmployerS__Emplo__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Job__EmployerId__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobAppoin__Emplo__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobSeeker__Emplo__0AD2A005" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EmployerS__JobSe__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Job__JobCategory__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobAppoin__JobID__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobSeeked__JobID__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobAppoin__JobSe__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__JobSeeked__JobSe__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Resume__JobSeeke__1367E606" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.ContactU" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

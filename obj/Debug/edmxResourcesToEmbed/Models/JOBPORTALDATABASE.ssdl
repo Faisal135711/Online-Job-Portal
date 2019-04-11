@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ContactUs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FullName" Type="text" />
+    <Property Name="Email" Type="text" />
+    <Property Name="Phone" Type="text" />
+    <Property Name="Message" Type="text" />
+  </EntityType>
+  <EntityType Name="Employer">
+    <Key>
+      <PropertyRef Name="EmployerId" />
+    </Key>
+    <Property Name="EmployerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployerUsername" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmployerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmployerContactNo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmployerEmail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmployerPassword" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProfilePictureName" Type="text" />
+    <Property Name="CompanyName" Type="text" />
+  </EntityType>
+  <EntityType Name="EmployerSelectsSeeker">
+    <Key>
+      <PropertyRef Name="EmployerSelectsSeekerID" />
+    </Key>
+    <Property Name="EmployerSelectsSeekerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployerId" Type="int" />
+    <Property Name="JobSeekerId" Type="int" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobRequirements" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="JobDescription" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="JobPosition" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobLocation" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobSalary" Type="money" />
+    <Property Name="JobWorkingHour" Type="float" Nullable="false" />
+    <Property Name="EmployerId" Type="int" Nullable="false" />
+    <Property Name="JobCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobAppoinment">
+    <Key>
+      <PropertyRef Name="JobAppoinmentID" />
+    </Key>
+    <Property Name="JobAppoinmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="JobSeekerId" Type="int" />
+    <Property Name="EmployerId" Type="int" />
+  </EntityType>
+  <EntityType Name="JobCategory">
+    <Key>
+      <PropertyRef Name="JobCategoryId" />
+    </Key>
+    <Property Name="JobCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobCategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobSeeked">
+    <Key>
+      <PropertyRef Name="JobSeekedID" />
+    </Key>
+    <Property Name="JobSeekedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobSeekerId" Type="int" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobSeeker">
+    <Key>
+      <PropertyRef Name="JobSeekerId" />
+    </Key>
+    <Property Name="JobSeekerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobSeekerUsername" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobSeekerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobSeekerContactNo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobSeekerEmail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JobSeekerPassword" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmployerId" Type="int" Nullable="false" />
+    <Property Name="EducationalQualification" Type="text" />
+    <Property Name="ResumeFileName" Type="text" />
+    <Property Name="ProfilePictureName" Type="text" />
+  </EntityType>
+  <EntityType Name="Resume">
+    <Key>
+      <PropertyRef Name="ResumeId" />
+    </Key>
+    <Property Name="ResumeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResumePath" Type="text" />
+    <Property Name="ResumeUploadDate" Type="date" Nullable="false" />
+    <Property Name="ResumeLastModifiedDate" Type="date" />
+    <Property Name="JobSeekerId" Type="int" Nullable="false" />
+    <Property Name="CvFile" Type="varbinary(max)" />
+    <Property Name="CvFileText" Type="text" />
+    <Property Name="CvFileName" Type="text" />
+  </EntityType>
+  <Association Name="FK__EmployerS__Emplo__239E4DCF">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EmployerSelectsSeeker" Type="Self.EmployerSelectsSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EmployerId" />
+      </Principal>
+      <Dependent Role="EmployerSelectsSeeker">
+        <PropertyRef Name="EmployerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmployerS__JobSe__24927208">
+    <End Role="JobSeeker" Type="Self.JobSeeker" Multiplicity="0..1" />
+    <End Role="EmployerSelectsSeeker" Type="Self.EmployerSelectsSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobSeeker">
+        <PropertyRef Name="JobSeekerId" />
+      </Principal>
+      <Dependent Role="EmployerSelectsSeeker">
+        <PropertyRef Name="JobSeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Job__EmployerId__182C9B23">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EmployerId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="EmployerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Job__JobCategory__1920BF5C">
+    <End Role="JobCategory" Type="Self.JobCategory" Multiplicity="1" />
+    <End Role="Job" Type="Self.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobCategory">
+        <PropertyRef Name="JobCategoryId" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="JobCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobAppoin__Emplo__2B3F6F97">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="0..1" />
+    <End Role="JobAppoinment" Type="Self.JobAppoinment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EmployerId" />
+      </Principal>
+      <Dependent Role="JobAppoinment">
+        <PropertyRef Name="EmployerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobAppoin__JobID__29572725">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobAppoinment" Type="Self.JobAppoinment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="JobAppoinment">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobAppoin__JobSe__2A4B4B5E">
+    <End Role="JobSeeker" Type="Self.JobSeeker" Multiplicity="0..1" />
+    <End Role="JobAppoinment" Type="Self.JobAppoinment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobSeeker">
+        <PropertyRef Name="JobSeekerId" />
+      </Principal>
+      <Dependent Role="JobAppoinment">
+        <PropertyRef Name="JobSeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobSeeked__JobID__1ED998B2">
+    <End Role="Job" Type="Self.Job" Multiplicity="1" />
+    <End Role="JobSeeked" Type="Self.JobSeeked" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="JobSeeked">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobSeeked__JobSe__1DE57479">
+    <End Role="JobSeeker" Type="Self.JobSeeker" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobSeeked" Type="Self.JobSeeked" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobSeeker">
+        <PropertyRef Name="JobSeekerId" />
+      </Principal>
+      <Dependent Role="JobSeeked">
+        <PropertyRef Name="JobSeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobSeeker__Emplo__0AD2A005">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+    <End Role="JobSeeker" Type="Self.JobSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EmployerId" />
+      </Principal>
+      <Dependent Role="JobSeeker">
+        <PropertyRef Name="EmployerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Resume__JobSeeke__1367E606">
+    <End Role="JobSeeker" Type="Self.JobSeeker" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Resume" Type="Self.Resume" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobSeeker">
+        <PropertyRef Name="JobSeekerId" />
+      </Principal>
+      <Dependent Role="Resume">
+        <PropertyRef Name="JobSeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployerSelectsSeeker" EntityType="Self.EmployerSelectsSeeker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobAppoinment" EntityType="Self.JobAppoinment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobCategory" EntityType="Self.JobCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobSeeked" EntityType="Self.JobSeeked" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobSeeker" EntityType="Self.JobSeeker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resume" EntityType="Self.Resume" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EmployerS__Emplo__239E4DCF" Association="Self.FK__EmployerS__Emplo__239E4DCF">
+      <End Role="Employer" EntitySet="Employer" />
+      <End Role="EmployerSelectsSeeker" EntitySet="EmployerSelectsSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmployerS__JobSe__24927208" Association="Self.FK__EmployerS__JobSe__24927208">
+      <End Role="JobSeeker" EntitySet="JobSeeker" />
+      <End Role="EmployerSelectsSeeker" EntitySet="EmployerSelectsSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Job__EmployerId__182C9B23" Association="Self.FK__Job__EmployerId__182C9B23">
+      <End Role="Employer" EntitySet="Employer" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Job__JobCategory__1920BF5C" Association="Self.FK__Job__JobCategory__1920BF5C">
+      <End Role="JobCategory" EntitySet="JobCategory" />
+      <End Role="Job" EntitySet="Job" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobAppoin__Emplo__2B3F6F97" Association="Self.FK__JobAppoin__Emplo__2B3F6F97">
+      <End Role="Employer" EntitySet="Employer" />
+      <End Role="JobAppoinment" EntitySet="JobAppoinment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobAppoin__JobID__29572725" Association="Self.FK__JobAppoin__JobID__29572725">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="JobAppoinment" EntitySet="JobAppoinment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobAppoin__JobSe__2A4B4B5E" Association="Self.FK__JobAppoin__JobSe__2A4B4B5E">
+      <End Role="JobSeeker" EntitySet="JobSeeker" />
+      <End Role="JobAppoinment" EntitySet="JobAppoinment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobSeeked__JobID__1ED998B2" Association="Self.FK__JobSeeked__JobID__1ED998B2">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="JobSeeked" EntitySet="JobSeeked" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobSeeked__JobSe__1DE57479" Association="Self.FK__JobSeeked__JobSe__1DE57479">
+      <End Role="JobSeeker" EntitySet="JobSeeker" />
+      <End Role="JobSeeked" EntitySet="JobSeeked" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobSeeker__Emplo__0AD2A005" Association="Self.FK__JobSeeker__Emplo__0AD2A005">
+      <End Role="Employer" EntitySet="Employer" />
+      <End Role="JobSeeker" EntitySet="JobSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Resume__JobSeeke__1367E606" Association="Self.FK__Resume__JobSeeke__1367E606">
+      <End Role="JobSeeker" EntitySet="JobSeeker" />
+      <End Role="Resume" EntitySet="Resume" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

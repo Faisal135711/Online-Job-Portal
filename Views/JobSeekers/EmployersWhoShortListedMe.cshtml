@@ -1,0 +1,69 @@
+﻿@model IEnumerable<JOBPORTAL.Models.Employer>
+
+@{
+    ViewBag.Title = "EmployersWhoShortListedMe";
+}
+
+<h2>EmployersWhoShortListedMe</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerUsername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerContactNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployerPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfilePictureName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerContactNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployerPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfilePictureName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployerId })
+        </td>
+    </tr>
+}
+
+</table>

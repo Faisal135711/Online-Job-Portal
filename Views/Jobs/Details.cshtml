@@ -1,0 +1,96 @@
+﻿@model JOBPORTAL.Models.Job
+
+@{
+    ViewBag.Title = "Details";
+}
+<!--
+<h2>Details</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobRequirements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobRequirements)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobWorkingHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobWorkingHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employer.EmployerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employer.EmployerUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobCategory.JobCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobCategory.JobCategoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobId }) |
+    @Html.ActionLink("Back to List", "Index")|
+    -->
+
+    @Html.ActionLink("Add to Shortlist", "ShortListJobs", new { })
+    @{
+        Session["JobId"] = Model.JobId.ToString();
+    }
+</p>

@@ -1,0 +1,34 @@
+﻿@model JOBPORTAL.Models.EmployerSelectsSeeker
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployerSelectsSeeker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employer.EmployerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employer.EmployerUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeeker.JobSeekerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeeker.JobSeekerUsername)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployerSelectsSeekerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

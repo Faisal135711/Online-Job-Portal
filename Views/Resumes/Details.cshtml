@@ -1,0 +1,77 @@
+﻿@model JOBPORTAL.Models.Resume
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Resume</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumeUploadDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumeUploadDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumeLastModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumeLastModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CvFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CvFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CvFileText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CvFileText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobSeeker.JobSeekerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobSeeker.JobSeekerUsername)
+        </dd>
+
+
+        @{
+
+            string s;
+            s =Model.CvFileName;
+
+            <a href="~/CVFILE/@s" download>
+                <button type="button" class="btn btn-blue btn-lg" style="float:right">Download Cv</button>
+            </a>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ResumeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

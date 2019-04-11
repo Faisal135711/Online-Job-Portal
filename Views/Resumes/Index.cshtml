@@ -1,0 +1,69 @@
+﻿@model IEnumerable<JOBPORTAL.Models.Resume>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumeUploadDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumeLastModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CvFile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CvFileText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobSeeker.JobSeekerUsername)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResumePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResumeUploadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResumeLastModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CvFile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CvFileText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobSeeker.JobSeekerUsername)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ResumeId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ResumeId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ResumeId })
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+<a href="~/CVFILE/CHAPTER 8 MAIN MEMORY.pdf" download>
+<button type="button" class="btn btn-blue btn-lg" style="float:right">Download</button>
+</a>

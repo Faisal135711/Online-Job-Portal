@@ -1,0 +1,64 @@
+﻿@model JOBPORTAL.Models.Employer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Employer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerPassword)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
